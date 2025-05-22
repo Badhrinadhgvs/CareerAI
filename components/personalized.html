@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CareerAI - Personalized AI Agent</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .navbar {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.7rem;
+      letter-spacing: 1px;
+      color: #3b82f6 !important;
+    }
+    .nav-link.active, .nav-link:hover {
+      color: #2563eb !important;
+      font-weight: 500;
+    }
+    .form-container {
+      background: #ffffff;
+      border-radius: 1rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      padding: 2rem;
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .form-container h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #1e3a8a;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .form-container p {
+      font-size: 1.1rem;
+      color: #4b5563;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #1e3a8a;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid #e5e7eb;
+      font-size: 1rem;
+      background: #f8fafc;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .form-group .error {
+      color: #dc3545;
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+    .submit-btn {
+      width: 100%;
+      border-radius: 2rem;
+      padding: 0.75rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      background: #3b82f6;
+      color: #fff;
+      border: none;
+      transition: transform 0.1s, background 0.2s;
+    }
+    .submit-btn:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+    }
+    .footer {
+      background: #f8f9fa;
+      padding: 40px 0 20px;
+      border-top: 1px solid #eee;
+      margin-top: auto;
+    }
+    .footer-brand {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    .footer-text {
+      color: #6c757d;
+      font-size: 0.9rem;
+      max-width: 300px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-links a {
+      color: #6c757d;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover {
+      color: #0d6efd;
+    }
+    .copyright {
+      color: #6c757d;
+      font-size: 0.85rem;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+    @media (max-width: 767px) {
+      .form-container {
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+        margin-bottom: 2rem;
+      }
+      .form-container h1 {
+        font-size: 1.8rem;
+      }
+      .form-container p {
+        font-size: 1rem;
+      }
+      .form-group label {
+        font-size: 0.9rem;
+      }
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.75rem;
+      }
+      .submit-btn {
+        font-size: 1rem;
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">CareerAI</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="../index.html#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="../index.html#features">Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="./chat.html">Get Guidance</a></li>
+        <li class="nav-item"><a class="nav-link active" href="./personalized.html">Personalized Guidance</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Form Interface -->
+<main>
+  <div class="form-container">
+    <h1>Create Your Personalized AI Agent</h1>
+    <p>Provide your details to build a custom AI agent tailored to your career goals.</p>
+    <form id="personalized-form">
+      <div class="form-group">
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" name="name" required>
+        <div class="error" id="name-error">Please enter your full name.</div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required>
+        <div class="error" id="email-error">Please enter a valid email address.</div>
+      </div>
+      <div class="form-group">
+        <label for="skills">Skills (e.g., Python, Marketing) *</label>
+        <input type="text" id="skills" name="skills" required>
+        <div class="error" id="skills-error">Please list your skills.</div>
+      </div>
+      <div class="form-group">
+        <label for="interests">Interests (e.g., Data Science, Design) *</label>
+        <input type="text" id="interests" name="interests" required>
+        <div class="error" id="interests-error">Please list your interests.</div>
+      </div>
+      <div class="form-group">
+        <label for="career-goals">Career Goals *</label>
+        <textarea id="career-goals" name="career-goals" required></textarea>
+        <div class="error" id="career-goals-error">Please describe your career goals.</div>
+      </div>
+      <div class="form-group">
+        <label for="industry">Preferred Industry</label>
+        <select id="industry" name="industry">
+          <option value="">Select an industry</option>
+          <option value="technology">Technology</option>
+          <option value="finance">Finance</option>
+          <option value="healthcare">Healthcare</option>
+          <option value="marketing">Marketing</option>
+          <option value="education">Education</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="additional-info">Additional Information</label>
+        <textarea id="additional-info" name="additional-info"></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Create AI Agent</button>
+    </form>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <div class="footer-brand">CareerAI</div>
+        <p class="footer-text">Empowering your career journey with AI-driven insights and personalized guidance for students and professionals.</p>
+      </div>
+      <div class="col-md-6 text-md-end">
+        <ul class="footer-links">
+          <li><a href="../index.html#about">About Us</a></li>
+          <li><a href="../index.html#features">Features</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+          <li><a href="../index.html#terms">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright text-center">
+      © 2025 CareerAI. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.getElementById('personalized-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Reset error messages
+    document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
+    
+    // Get form values
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const skills = document.getElementById('skills').value.trim();
+    const interests = document.getElementById('interests').value.trim();
+    const careerGoals = document.getElementById('career-goals').value.trim();
+    
+    // Basic validation
+    let isValid = true;
+    if (!name) {
+      document.getElementById('name-error').style.display = 'block';
+      isValid = false;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      document.getElementById('email-error').style.display = 'block';
+      isValid = false;
+    }
+    if (!skills) {
+      document.getElementById('skills-error').style.display = 'block';
+      isValid = false;
+    }
+    if (!interests) {
+      document.getElementById('interests-error').style.display = 'block';
+      isValid = false;
+    }
+    if (!careerGoals) {
+      document.getElementById('career-goals-error').style.display = 'block';
+      isValid = false;
+    }
+    
+    if (isValid) {
+      // Mock submission
+      alert('AI Agent created successfully! Your personalized career guidance agent is ready.');
+      document.getElementById('personalized-form').reset();
+    }
+  });
+</script>
+</body>
+</html>
